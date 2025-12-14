@@ -1,19 +1,4 @@
-from abc import ABC, abstractmethod
-
-
-class Figure(ABC):
-    @abstractmethod
-    def get_area(self):
-        pass
-
-    @abstractmethod
-    def get_perimeter(self):
-        pass
-
-    def add_area(self, other_figure):
-        if not isinstance(other_figure, Figure):
-            raise ValueError("Должна быть фигура")
-        return self.get_area() + other_figure.get_area()
+from figure import Figure
 
 
 class Square(Figure):
@@ -31,9 +16,3 @@ class Square(Figure):
     @property
     def get_perimeter(self):
         return self.side_a * 4
-
-
-s = Square(10)
-p = Square(10)
-print(s.get_area)
-print(p.get_perimeter)

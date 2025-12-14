@@ -1,20 +1,5 @@
-from abc import ABC, abstractmethod
+from figure import Figure
 import math
-
-
-class Figure(ABC):
-    @abstractmethod
-    def get_area(self):
-        pass
-
-    @abstractmethod
-    def get_perimeter(self):
-        pass
-
-    def add_area(self, other_figure):
-        if not isinstance(other_figure, Figure):
-            raise ValueError("Должна быть фигура")
-        return self.get_area() + other_figure.get_area()
 
 
 class Triangle(Figure):
@@ -23,15 +8,28 @@ class Triangle(Figure):
             raise ValueError(
                 f"Стороны треугольника должны быть больше 0, а у тебя sideA={side_a}, sideB={side_b}, sideC={side_c}"
             )
+        elif (
+            side_a + side_b > side_c
+            and side_a + side_c > side_b
+            and side_b + side_c > side_a
+        ):
+            raise ValueError(
+                "Сумма двух сторон треугольника должна быть больше длины третьей стороны"
+            )
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
 
     @property
     def get_area(self):
-        p = (self.side_a + self.side_b + self.side_c) / 2
+        semi_p = (self.side_a + self.side_b + self.side_c) / 2
         return math.sqrt(
-            (p * (p - self.side_a) * (p - self.side_b) * (p - self.side_c))
+            (
+                semi_p
+                * (semi_p - self.side_a)
+                * (semi_p - self.side_b)
+                * (semi_p - self.side_c)
+            )
         )
 
     @property
@@ -39,7 +37,7 @@ class Triangle(Figure):
         return self.side_a + self.side_b + self.side_c
 
 
-s = Triangle(13, 14, 15)
-p = Triangle(13, 14, 15)
+s = Triangle(1, 5, 10)
+p = Triangle(3, 5, 4)
 print(s.get_area)
 print(p.get_perimeter)
