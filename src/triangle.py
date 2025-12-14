@@ -1,4 +1,4 @@
-from figure import Figure
+from src.figure import Figure
 import math
 
 
@@ -8,7 +8,7 @@ class Triangle(Figure):
             raise ValueError(
                 f"Стороны треугольника должны быть больше 0, а у тебя sideA={side_a}, sideB={side_b}, sideC={side_c}"
             )
-        elif (
+        elif not (
             side_a + side_b > side_c
             and side_a + side_c > side_b
             and side_b + side_c > side_a
@@ -37,7 +37,7 @@ class Triangle(Figure):
         return self.side_a + self.side_b + self.side_c
 
 
-s = Triangle(1, 5, 10)
+s = Triangle(3, 5, 4)
 p = Triangle(3, 5, 4)
 print(s.get_area)
 print(p.get_perimeter)
