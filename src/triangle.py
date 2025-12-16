@@ -14,7 +14,7 @@ class Triangle(Figure):
             and side_b + side_c > side_a
         ):
             raise ValueError(
-                "Сумма двух сторон треугольника должна быть больше длины третьей стороны"
+                "Сумма двух сторон треугольника должна быть больше третьей стороны"
             )
         self.side_a = side_a
         self.side_b = side_b
@@ -35,9 +35,3 @@ class Triangle(Figure):
     @property
     def get_perimeter(self):
         return self.side_a + self.side_b + self.side_c
-
-
-s = Triangle(3, 5, 4)
-p = Triangle(3, 5, 4)
-print(s.get_area)
-print(p.get_perimeter)

@@ -1,9 +1,9 @@
-from figure import Figure
+from src.figure import Figure
 import math
 
 
 class Circle(Figure):
-    def __init__(self, side_r: int):
+    def __init__(self, side_r: int | float):
         if side_r <= 0:
             raise ValueError(
                 f"Радиус круга должны быть больше 0, а у тебя радиус = {side_r}"
