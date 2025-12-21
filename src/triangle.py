@@ -20,7 +20,6 @@ class Triangle(Figure):
         self.side_b = side_b
         self.side_c = side_c
 
-    @property
     def get_area(self):
         semi_p = (self.side_a + self.side_b + self.side_c) / 2
         return math.sqrt(
@@ -32,6 +31,5 @@ class Triangle(Figure):
             )
         )
 
-    @property
     def get_perimeter(self):
         return self.side_a + self.side_b + self.side_c
