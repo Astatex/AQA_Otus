@@ -1,2 +1,0 @@
-# AQA_Otus
-student
