@@ -3,7 +3,7 @@ import json
 
 # Загрузка пользователей
 with open("users.json", "r") as json_file:
-    users_data = json.load(json_file)
+    users = json.load(json_file)
 
 books = []
 with open("books.csv", "r") as csv_file:
@@ -19,13 +19,13 @@ with open("books.csv", "r") as csv_file:
         )
 
 # распределение книг
-base = len(books) // len(users_data)
-extra = len(books) % len(users_data)
+base = len(books) // len(users)
+extra = len(books) % len(users)
 
 # финальный список
 result = []
 book_index = 0
-for i, user in enumerate(users_data):
+for i, user in enumerate(users):
     count = base + 1
     book_index += count
     result.append(
