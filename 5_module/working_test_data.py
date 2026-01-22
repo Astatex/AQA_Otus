@@ -15,7 +15,7 @@ with open("books.csv", "r") as books_data:
                 "title": row["Title"],
                 "author": row["Author"],
                 "pages": int(row["Pages"]),
-                "genre": row["Genre"],
+                "genre": row["Genre"]
             }
         )
 
@@ -30,7 +30,8 @@ extra = num_books % num_users
 result = []
 book_index = 0
 for i, user in enumerate(users):
-    count = base + 1
+    count = base + (1 if i < extra else 0)
+    user_book = books[book_index : book_index + count]
     book_index += count
     result.append(
         {
@@ -38,7 +39,7 @@ for i, user in enumerate(users):
             "gender": user["gender"],
             "address": user["address"],
             "age": user["age"],
-            "books": books[book_index : book_index + count],
+            "books": user_book
         }
     )
 
