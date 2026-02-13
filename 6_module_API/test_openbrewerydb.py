@@ -11,18 +11,21 @@ def test_get(per_page):
     )
     data = response.json()
     assert response.status_code == 200
-    assert len(data) == per_page, f"Ожидалось {per_page} записей, получено {len(data)}"
+    assert len(data) == per_page, f"Ожидалось{per_page}записей, получено{len(data)}"
 
 
-def test_combined_filters():
+@pytest.mark.parametrize(
+    "state", ["New York", "Oklahoma", "Wisconsin", "Texas", "California"]
+)
+def test_combined_filters(state):
     response = requests.get(
-        "https://api.openbrewerydb.org/v1/breweries?by_state=New%20York&by_type=brewpub&per_page=5"
+        f"https://api.openbrewerydb.org/v1/breweries?by_state={state}&by_type=brewpub&per_page=5"
     )
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 5
     for field in data:
-        assert field["state_province"] == "New York"
+        assert field["state_province"] == state
         assert field["brewery_type"] == "brewpub"
 
 
@@ -46,4 +49,4 @@ def test_nonexistent_brewery():
 @pytest.mark.parametrize("method", ["POST", "PUT", "PATCH", "DELETE"])
 def test_only_get(method):
     response = requests.request(method, "https://api.openbrewerydb.org/v1/breweries")
-    assert response.status_code == 404 or 405
+    assert response.status_code in (404, 405)

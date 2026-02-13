@@ -15,15 +15,15 @@ def test_get():
 
 
 @pytest.mark.parametrize(
-    "title, body, userId",
+    "title, body, user_id",
     [
         (fake.sentence(), fake.text(max_nb_chars=2001), random.randint(1, 100)),
         (fake.sentence(), fake.text(max_nb_chars=201), random.randint(1, 100)),
         (fake.sentence(), fake.text(max_nb_chars=21), random.randint(1, 100)),
     ],
 )
-def test_post(title, body, userId):
-    body_json = {"title": title, "body": body, "userId": userId}
+def test_post(title, body, user_id):
+    body_json = {"title": title, "body": body, "userId": user_id}
     headers = {"Content-type": "application/json"}
 
     response = requests.post(
@@ -35,11 +35,11 @@ def test_post(title, body, userId):
     print(json_data)
     assert json_data["title"] == title
     assert json_data["body"] == body
-    assert json_data["userId"] == userId
+    assert json_data["userId"] == user_id
 
 
 @pytest.mark.parametrize(
-    "id, title, body, userId",
+    "id, title, body, user_id",
     [
         (
             random.randint(10, 89),
@@ -61,8 +61,8 @@ def test_post(title, body, userId):
         ),
     ],
 )
-def test_put(id, title, body, userId):
-    body_json = {"id": id, "title": title, "body": body, "userId": userId}
+def test_put(id, title, body, user_id):
+    body_json = {"id": id, "title": title, "body": body, "userId": user_id}
     headers = {"Content-type": "application/json"}
 
     response = requests.put(
@@ -77,7 +77,7 @@ def test_put(id, title, body, userId):
     assert json_data["id"] == id
     assert json_data["title"] == title
     assert json_data["body"] == body
-    assert json_data["userId"] == userId
+    assert json_data["userId"] == user_id
 
 
 def test_patch():
